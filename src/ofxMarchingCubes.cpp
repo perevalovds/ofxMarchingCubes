@@ -70,6 +70,8 @@ void ofxMarchingCubes::update(float _threshold, bool bCalcNormals){
 }	
 
 void ofxMarchingCubes::debugDraw(){
+	cout << "fxMarchingCubes::debugDraw() works slow, for faster - use ofMesh mesh = cubes.getMesh(); mesh.draw();" << endl;
+
 	glColor3f(1.0f, 1.0f, 1.0f);
 	drawFilled();
 	glLineWidth(2.0f);
@@ -349,7 +351,23 @@ ofPoint ofxMarchingCubes::getGridRes(){
 	return ofPoint(gridResX, gridResY, gridResZ);
 }
 
+
+ofMesh ofxMarchingCubes::getMesh() {		//Create mesh
+	ofMesh mesh;
+	int n = vertices.size();	//they forms triangles
+	for (int i = 0; i < n; i++) {
+		mesh.addVertex(vertices[i]);
+	}
+	for (int i = 0; i < n; i+=3) {
+		mesh.addTriangle(i, i + 1, i + 2);
+	}
+
+	return mesh;
+}
+
 void ofxMarchingCubes::saveModel(string fileName, bool bUseASCII_mode){
+	//For saving OBJ - use ofxKu - ofxKuGeomMeshUtils.h - ofxKuSaveObjFile()
+
 	stlExporter.useASCIIFormat(bUseASCII_mode);
 	
 	int numVertices = vertices.size();

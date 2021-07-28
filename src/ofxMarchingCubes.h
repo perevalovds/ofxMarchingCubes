@@ -34,7 +34,7 @@ public:
 	void init(const ofPoint& _iniGridPos, const ofPoint& gridSize, unsigned int _gridResX,unsigned int _gridResY,unsigned int _gridResZ);
 	void clear();
 	void update(float _threshold, bool bCalcNormals = false);
-	virtual void draw(){debugDraw();}
+	virtual void draw(){debugDraw();}	//NOTE: works slow, for faster - use ofMesh mesh = cubes.getMesh(); mesh.draw();
 	void debugDraw();
 	void drawWireFrame();
 	void drawFilled();
@@ -65,8 +65,11 @@ public:
 	ofPoint getGridSize();
 	ofPoint getGridRes();
 	
+	ofMesh getMesh();		//Create mesh
+
 	void saveModel(string fileName, bool bUseASCII_mode = false);
 	ofxSTLExporter& getSTLExporter();
+	//For saving OBJ - use ofxKu - ofxKuGeomMeshUtils.h - ofxKuSaveObjFile()
 	
 protected:
 	ofxSTLExporter stlExporter;
