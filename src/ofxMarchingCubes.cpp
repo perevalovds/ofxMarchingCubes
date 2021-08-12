@@ -70,7 +70,7 @@ void ofxMarchingCubes::update(float _threshold, bool bCalcNormals){
 }	
 
 void ofxMarchingCubes::debugDraw(){
-	cout << "fxMarchingCubes::debugDraw() works slow, for faster - use ofMesh mesh = cubes.getMesh(); mesh.draw();" << endl;
+	cout << "ofxMarchingCubes::debugDraw() works slow, for faster - use ofMesh mesh = cubes.getMesh(); mesh.draw();" << endl;
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 	drawFilled();
@@ -357,10 +357,12 @@ ofMesh ofxMarchingCubes::getMesh() {		//Create mesh
 	int n = vertices.size();	//they forms triangles
 	for (int i = 0; i < n; i++) {
 		mesh.addVertex(vertices[i]);
+		mesh.addNormal(normals[i]);
 	}
 	for (int i = 0; i < n; i+=3) {
 		mesh.addTriangle(i, i + 1, i + 2);
 	}
+
 
 	return mesh;
 }
